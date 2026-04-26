@@ -3,231 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Born Chantha - Digital Industry</title>
-    <link rel="icon" type="image/png" href="./Image/logo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Koulen&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Digital Industry | Professional IT Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* កំណត់ Font គោល */
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --dark: #070b14;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass: rgba(255, 255, 255, 0.05);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --female: #ff758c;
+            --male: #4facfe;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Kantumruy Pro', sans-serif; }
+
         body {
-            font-family: 'Poppins', 'Battambang', sans-serif;
-            /* Background មានចលនាไล่ระดับสี */
-            background: linear-gradient(-45deg, #a8c0ff, #3f2b96, #23a6d5, #23d5ab);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background-color: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+            background: radial-gradient(circle at 0% 0%, #1e293b 0%, #070b14 50%);
+            min-height: 100vh;
         }
 
-        /* Animation សម្រាប់ Background */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        /* Scrollbar Customization */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--glass); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
 
-        .koulen { font-family: 'Koulen', cursive; }
-        .battambang { font-family: 'Battambang', cursive; }
-
-        /* Animation សម្រាប់ Card */
-        .card-container {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s 0.2s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        /* Navigation */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 8%; background: rgba(7, 11, 20, 0.8);
+            backdrop-filter: blur(15px); position: fixed; width: 100%; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+        .logo { font-size: 24px; font-weight: 800; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--text); font-size: 0.95rem; transition: 0.3s; cursor: pointer; padding: 8px 15px; border-radius: 8px; }
+        .nav-links a:hover, .nav-links a.active { background: var(--glass); color: var(--primary); }
+
+        .container { margin-top: 80px; padding: 40px 8%; }
+        .page-section { display: none; animation: fadeIn 0.8s ease-out; }
+        .active-section { display: block; }
+
+        /* Hero Section */
+        .hero-content { text-align: center; padding: 60px 0; }
+        .hero-title { font-size: 2.8rem; line-height: 1.3; margin-bottom: 20px; font-weight: 700; }
+        .hero-title span { color: var(--primary); }
         
-        #cv-page {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
+        .typewriter-box { font-size: 1.5rem; color: var(--primary); height: 60px; margin-bottom: 30px; font-weight: 600; }
+        .cursor { display: inline-block; width: 3px; height: 1.5rem; background: var(--primary); animation: blink 0.7s infinite; vertical-align: middle; }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        .hero-desc { color: var(--text-muted); font-size: 1.1rem; max-width: 850px; margin: 0 auto 40px; line-height: 1.8; }
 
-        /* Animation សម្រាប់ប៊ូតុងម្ដងមួយៗ */
-        .animated-link {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        /* Feature Cards on Home */
+        .home-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px; }
+        .info-card { background: var(--glass); border: 1px solid rgba(255,255,255,0.05); padding: 35px; border-radius: 20px; transition: 0.3s; }
+        .info-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .info-card h3 { color: var(--primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .info-card p { font-size: 0.95rem; line-height: 1.7; color: var(--text-muted); }
+
+        /* Working Status Banner */
+        .status-banner {
+            background: linear-gradient(90deg, rgba(0, 242, 254, 0.1), rgba(79, 172, 254, 0.05));
+            border: 1px solid var(--primary); padding: 25px; border-radius: 15px;
+            display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px; margin: 40px 0;
         }
+        .status-item { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.1rem; }
+        .status-item i { color: var(--primary); font-size: 1.4rem; }
+        .status-item span { color: #ff758c; font-size: 0.9rem; font-weight: 400; }
+
+        /* Services Grid */
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.2rem; margin-bottom: 10px; }
+        .section-header .line { width: 80px; height: 4px; background: var(--primary); margin: 0 auto; border-radius: 10px; }
+
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .service-card { background: var(--glass); padding: 40px 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); text-align: center; transition: 0.3s; }
+        .service-card:hover { transform: translateY(-10px); border-color: var(--primary); background: rgba(255,255,255,0.08); }
+        .service-card i { font-size: 50px; color: var(--primary); margin-bottom: 25px; }
+        .service-card h3 { margin-bottom: 15px; font-size: 1.3rem; }
+        .service-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+        /* Team & Managers */
+        .manager-flex { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 50px; }
+        .manager-card {
+            background: linear-gradient(145deg, rgba(0, 242, 254, 0.08), rgba(0,0,0,0.4));
+            border: 1px solid var(--primary); width: 320px; padding: 30px; border-radius: 20px; text-align: center;
+        }
+        .manager-card i { font-size: 55px; color: var(--primary); margin-bottom: 15px; }
+        .manager-card h3 { font-size: 1.4rem; margin-bottom: 5px; }
+        .manager-card p { color: var(--primary); font-size: 0.9rem; font-weight: 600; }
+
+        .tab-controls { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+        .tab-btn {
+            padding: 12px 35px; background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text); border-radius: 50px; cursor: pointer; transition: 0.3s; font-weight: 600;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .tab-btn.active { background: var(--primary); color: var(--dark); border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 242, 254, 0.4); }
+
+        .member-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .member-card {
+            background: var(--glass); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
+            position: relative; transition: 0.3s; overflow: hidden;
+        }
+        .member-card:hover { transform: scale(1.03); background: rgba(255,255,255,0.1); }
+        .member-card::after { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%; }
+        .m-card::after { background: var(--male); }
+        .f-card::after { background: var(--female); }
         
-        /* Animation ពន្លឺជុំវិញរូបភាព Profile */
-        .profile-pulse {
-            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
-        }
+        .m-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .m-avatar { width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .m-card .m-avatar { color: var(--male); }
+        .f-card .m-avatar { color: var(--female); }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
-        }
+        .contact-box { font-size: 0.9rem; color: var(--text-muted); }
+        .contact-box div { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .contact-box a { color: var(--primary); text-decoration: none; }
 
-        /* --- កូដថ្មីសម្រាប់ Slider --- */
-        .slider-dot.active {
-            background-color: #4f46e5; /* ពណ៌ indigo-600 */
+        .btn-main { background: var(--primary); color: var(--dark); padding: 12px 35px; border-radius: 50px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 242, 254, 0.5); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 1.8rem; }
+            .typewriter-box { font-size: 1.1rem; }
+            .nav-links { display: none; }
         }
-        /* --- ចប់កូដថ្មី --- */
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
+<body>
 
-    <div id="main-page" class="card-container w-full max-w-sm mx-auto">
-        <div class="bg-white/70 backdrop-blur-xl rounded-2xl shadow-2xl p-6 relative overflow-hidden border border-white/30">
+    <nav>
+        <div class="logo">DIGITAL INDUSTRY</div>
+        <ul class="nav-links">
+            <li><a onclick="showSection('home')" id="nav-home" class="active">ទំព័រដើម</a></li>
+            <li><a onclick="showSection('services')" id="nav-services">សេវាកម្ម</a></li>
+            <li><a onclick="showSection('team')" id="nav-team">ក្រុមការងារ Support</a></li>
+        </ul>
+    </nav>
 
-            <div class="text-center">
-                <div class="w-full flex justify-between items-center px-2">
-                    <span class="koulen text-lg text-gray-800 tracking-wide font-semibold">ឧស្សាហកម្មឌីជីថល</span>
-                    <span class="koulen text-lg text-gray-800 tracking-wide font-semibold">DIGITAL INDUSTRY</span>
+    <div class="container">
+        
+        <section id="home" class="page-section active-section">
+            <div class="hero-content">
+                <h1 class="hero-title">ស្វាគមន៍មកកាន់ <span>Digital Industry</span><br>ដំណោះស្រាយបច្ចេកវិទ្យាដ៏ទំនើប</h1>
+                <div class="typewriter-box">
+                    <span id="typewriter"></span><span class="cursor"></span>
                 </div>
-                <div class="mt-1 h-[2px] bg-gray-400 w-full"></div>
+                <p class="hero-desc">
+                    យើងគឺជាក្រុមហ៊ុនឈានមុខគេក្នុងការផ្តល់សេវាកម្មព័ត៌មានវិទ្យា (IT) ដែលមានការយកចិត្តទុកដាក់ខ្ពស់លើគុណភាព និងប្រសិទ្ធភាព។ 
+                    ជាមួយក្រុមការងារជំនាញ DI និង DUC Support យើងត្រៀមខ្លួនជានិច្ចដើម្បីបម្រើលោកអ្នកគ្រប់ពេលវេលា។
+                </p>
+                <button class="btn-main" onclick="showSection('services')">ស្វែងយល់ពីសេវាកម្ម</button>
             </div>
 
-            <div class="flex justify-center mt-6">
-                <div class="profile-pulse w-32 h-32 p-1 rounded-full bg-white shadow-lg">
-                    <img class="w-full h-full rounded-full object-cover border-4 border-green-500" src="./Image/ThaPf.png" alt="Born Chantha Profile Picture">
+            <div class="status-banner">
+                <div class="status-item"><i class="fa-solid fa-clock-rotate-left"></i> ធ្វើការងារ 24h / 7 ថ្ងៃ</div>
+                <div class="status-item"><i class="fa-solid fa-calendar-day"></i> <span>* សម្រាកតែថ្ងៃបុណ្យជាតិប៉ុណ្ណោះ</span></div>
+                <div class="status-item"><i class="fa-solid fa-shield-halved"></i> សុវត្ថិភាព និងទំនុកចិត្តខ្ពស់</div>
+            </div>
+
+            <div class="home-info-grid">
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-headset"></i> DI Support Group</h3>
+                    <p>
+                        ផ្តោតសំខាន់លើសេវាកម្មអតិថិជន និងការគាំទ្រផ្នែកបច្ចេកទេសពីចម្ងាយ (Remote Support)។ 
+                        ក្រុមការងារនេះមានតួនាទីត្រួតពិនិត្យប្រព័ន្ធ ការឆ្លើយតបសំណួរ និងដោះស្រាយបញ្ហាបច្ចេកទេសទូទៅជូនលោកអ្នកដោយភាពរហ័សរហួន។
+                    </p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-tools"></i> DUC Support Group</h3>
+                    <p>
+                        ជាក្រុមការងារបច្ចេកទេសជំនាញចុះផ្ទាល់ (On-site Support) ដែលផ្តោតលើការជួសជុល Hardware, 
+                        ការរៀបចំប្រព័ន្ធបណ្តាញ Network និងការតម្លើងបរិក្ខារបច្ចេកវិទ្យាផ្សេងៗ ដើម្បីធានាថាគ្រឿងម៉ាស៊ីនរបស់អ្នកដំណើរការបានល្អ។
+                    </p>
                 </div>
             </div>
+        </section>
 
-            <div class="text-center mt-4">
-                <h1 class="text-3xl font-bold text-gray-900 tracking-wider">BORN CHANTHA</h1>
-                <p class="battambang text-2xl text-gray-700 mt-1">ប៊ន ចន្ថា</p>
+        <section id="services" class="page-section">
+            <div class="section-header">
+                <h2>សេវាកម្មជំនាញរបស់យើង</h2>
+                <div class="line"></div>
             </div>
-
-            <div class="mt-8 flex flex-col space-y-4">
-                <a href="https://www.facebook.com/chanthakh222" target="_blank" class="animated-link flex items-center justify-center w-full bg-[#1877F2] text-white font-bold py-3 px-4 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-b-4 border-blue-800" style="animation-delay: 0.4s;">
-                    <i class="fab fa-facebook-f fa-lg mr-3"></i>
-                    <span>FACEBOOK: BORN CHANTHA</span>
-                </a>
-                <a href="https://www.youtube.com/@brothaofficial8886" target="_blank" class="animated-link flex items-center justify-center w-full bg-[#FF0000] text-white font-bold py-3 px-4 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-b-4 border-red-800" style="animation-delay: 0.5s;">
-                    <i class="fab fa-youtube fa-lg mr-3"></i>
-                    <span>YOUTUBE: BORN CHANTHA</span>
-                </a>
-                <a href="https://t.me/Ch_Tha002" target="_blank" class="animated-link flex items-center justify-center w-full bg-[#0088cc] text-white font-bold py-3 px-4 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-b-4 border-sky-800" style="animation-delay: 0.6s;">
-                    <i class="fab fa-telegram fa-lg mr-3"></i>
-                    <span class="battambang">IT_BORN_Chantha</span>
-                </a>
-                <a href="https://www.tiktok.com/@thagm.kh?_t=ZS-8zMbWuvsrvF&_r=1" target="_blank" class="animated-link flex items-center justify-center w-full bg-[#00F2EA] text-black font-bold py-3 px-4 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-b-4 border-cyan-700" style="animation-delay: 0.7s;">
-                    <i class="fab fa-tiktok fa-lg mr-3"></i>
-                    <span>TIKTOK: BORN CHANTHA</span>
-                </a>
-                <a href="mailto:bonchantha43@gmail.com" target="_blank" class="animated-link flex items-center justify-center w-full bg-red-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-b-4 border-red-800" style="animation-delay: 0.8s;">
-                    <i class="fas fa-envelope fa-lg mr-3"></i>
-                    <span>bonchantha43@gmail.com</span>
-                </a>
-                <a href="tel:0882772661" target="_blank" class="animated-link flex items-center justify-center w-full bg-green-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-b-4 border-green-800" style="animation-delay: 0.9s;">
-                    <i class="fas fa-phone fa-lg mr-3"></i>
-                    <span>088 277 266 1</span>
-                </a>
-                <button id="cv-button" class="animated-link flex items-center justify-center w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-b-4 border-indigo-800" style="animation-delay: 1.0s;">
-                    <i class="fas fa-file-alt fa-lg mr-3"></i>
-                    <span class="battambang">CV ព័ត៌មានផ្ទាល់ខ្លួន</span>
-                </button>
-            </div>
-
-            <div class="mt-8">
-                <div class="relative w-full overflow-hidden rounded-lg shadow-lg">
-                    <div id="slider-track" class="flex transition-transform duration-500 ease-in-out">
-                        <div class="w-full flex-shrink-0">
-                             <img src="./Image/Slai1.jpg" alt="Slide 1" class="w-full h-48 object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                             <img src="./Image/Slai2.jpg" alt="Slide 2" class="w-full h-48 object-cover">
-                        </div>
-                        <div class="w-full flex-shrink-0">
-                             <img src="./Image/Slai3.jpg" alt="Slide 3" class="w-full h-48 object-cover">
-                        </div>
-                    </div>
+            <div class="service-grid">
+                <div class="service-card">
+                    <i class="fa-solid fa-laptop-medical"></i>
+                    <h3>ជួសជុល Computer</h3>
+                    <p>ជួសជុលកុំព្យូទ័រគ្រប់ប្រភេទ ទាំងផ្នែក Hardware (គ្រឿងបន្លាស់) និង Software (កម្មវិធី) ឱ្យដំណើរការដូចថ្មី។</p>
                 </div>
-                <div id="slider-dots" class="flex justify-center space-x-2 mt-4">
-                    </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <h3>ឆែក Internet</h3>
+                    <p>ត្រួតពិនិត្យ និងវិភាគល្បឿនអ៊ិនធឺណិត ដើម្បីធានាបាននូវស្ថេរភាពនៃការប្រើប្រាស់ប្រចាំថ្ងៃ។</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-network-wired"></i>
+                    <h3>គ្រប់គ្រង Internet</h3>
+                    <p>រៀបចំ និងគ្រប់គ្រងប្រព័ន្ធ Network ក្នុងក្រុមហ៊ុន ឬគេហដ្ឋាន ឱ្យមានសុវត្ថិភាព និងលឿនបំផុត។</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-code"></i>
+                    <h3>បង្កើត Website</h3>
+                    <p>រចនា និងអភិវឌ្ឍន៍គេហទំព័រទំនើបៗ (Professional Website) ស្របតាមតម្រូវការអាជីវកម្មក្នុងលោកឌីជីថល។</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <h3>ដោះស្រាយបញ្ហា Internet</h3>
+                    <p>ចុះដោះស្រាយរាល់បញ្ហារអាក់រអួលនៃអ៊ិនធឺណិត ឬសេវាដើរយឺត យ៉ាងឆាប់រហ័សទាន់ចិត្ត។</p>
+                </div>
             </div>
-            </div>
-    </div>
+        </section>
 
-    <div id="cv-page" class="w-full max-w-2xl mx-auto hidden">
-        <div class="bg-white/70 backdrop-blur-xl rounded-2xl shadow-2xl p-6 relative overflow-hidden border border-white/30">
-            <h2 class="koulen text-3xl text-center text-gray-900 mb-4">CV របស់ខ្ញុំ</h2>
+        <section id="team" class="page-section">
+            <div class="section-header">
+                <h2>រចនាសម្ព័ន្ធក្រុមការងារ</h2>
+                <div class="line"></div>
+            </div>
             
-            <div class="space-y-4">
-                <img src="./Image/CV-BornChantha-01.jpg" alt="CV Page 1" class="rounded-lg shadow-md w-full">
-                <img src="./Image/CV-BornChantha-02.jpg" alt="CV Page 2" class="rounded-lg shadow-md w-full">
+            <div class="manager-flex">
+                <div class="manager-card">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <h3>លោក ប៊ន ចន្ថា</h3>
+                    <p>អ្នកបង្កើត Website</p>
+                </div>
+                <div class="manager-card">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <h3>លោក ឡោក ឆាណុន</h3>
+                    <p>Manager</p>
+                </div>
             </div>
 
-            <div class="mt-8 text-center">
-                <button id="back-button" class="bg-gray-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-b-4 border-gray-900">
-                    <i class="fas fa-arrow-left mr-2"></i>
-                    <span class="battambang">ត្រឡប់ក្រោយ</span>
+            <div class="tab-controls">
+                <button class="tab-btn active" id="btn-duc" onclick="renderTeam('duc')">
+                    <i class="fa-solid fa-screwdriver-wrench"></i> ផ្នែក DUC Support
+                </button>
+                <button class="tab-btn" id="btn-di" onclick="renderTeam('di')">
+                    <i class="fa-solid fa-headset"></i> ផ្នែក DI Support
                 </button>
             </div>
-        </div>
+
+            <div id="team-container" class="member-grid"></div>
+        </section>
+
     </div>
 
     <script>
-        const mainPage = document.getElementById('main-page');
-        const cvPage = document.getElementById('cv-page');
-        const cvButton = document.getElementById('cv-button');
-        const backButton = document.getElementById('back-button');
-
-        // ពេលចុចប៊ូតុង CV
-        cvButton.addEventListener('click', () => {
-            mainPage.classList.add('hidden');
-            cvPage.classList.remove('hidden');
-            // Scroll to top
-            window.scrollTo(0, 0);
-        });
-
-        // ពេលចុចប៊ូតុងត្រឡប់ក្រោយ
-        backButton.addEventListener('click', () => {
-            cvPage.classList.add('hidden');
-            mainPage.classList.remove('hidden');
-        });
-
-        // --- កូដថ្មីសម្រាប់ Slider ---
-        const sliderTrack = document.getElementById('slider-track');
-        const sliderDotsContainer = document.getElementById('slider-dots');
-        const slides = sliderTrack.children;
-        const totalSlides = slides.length;
-        let currentIndex = 0;
-
-        // បង្កើត Dots
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('slider-dot', 'w-3', 'h-3', 'bg-gray-400', 'rounded-full', 'cursor-pointer', 'transition-colors');
-            sliderDotsContainer.appendChild(dot);
+        // SPA Section Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active-section'));
+            document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active-section');
+            document.getElementById('nav-' + (sectionId === 'home' ? 'home' : (sectionId === 'services' ? 'services' : 'team'))).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        const dots = sliderDotsContainer.children;
 
-        function updateSlider() {
-            // រំកិល Track
-            sliderTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-            
-            // Update dots
-            for (let i = 0; i < totalSlides; i++) {
-                dots[i].classList.remove('active');
+        // Improved Typewriter Effect
+        const typeArray = [
+            "Website បង្កើតដោយលោក ប៊ន ចន្ថា ",
+            "សម្រាប់ទាក់ទងការងារផ្សេងៗជាមួយ DI & DUC Support",
+            "យើងផ្តល់សេវាកម្ម ជួសជុល Network និង បង្កើត Website",
+            "ដំណោះស្រាយបច្ចេកវិទ្យា 24/7 សម្រាប់អ្នក"
+        ];
+        let tIndex = 0, cIndex = 0, isDeleting = false;
+        function type() {
+            const current = typeArray[tIndex];
+            if (isDeleting) {
+                document.getElementById('typewriter').textContent = current.substring(0, cIndex - 1);
+                cIndex--;
+            } else {
+                document.getElementById('typewriter').textContent = current.substring(0, cIndex + 1);
+                cIndex++;
             }
-            dots[currentIndex].classList.add('active');
+            let speed = isDeleting ? 40 : 100;
+            if (!isDeleting && cIndex === current.length) { speed = 2500; isDeleting = true; }
+            else if (isDeleting && cIndex === 0) { isDeleting = false; tIndex = (tIndex + 1) % typeArray.length; speed = 500; }
+            setTimeout(type, speed);
         }
 
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            updateSlider();
+        // Team Data Objects
+        const ducData = [
+            { name: "ញ៉ន ចន្ធូ", gender: "ស្រី", phone: "0965706427", telegram: "@DEE2024108" },
+            { name: "វន ស្រីអែម", gender: "ស្រី", phone: "0979891097", telegram: "@Sreyem3355" },
+            { name: "ផន ផូ", gender: "ប្រុស", phone: "0969290959", telegram: "@Phornpho" },
+            { name: "ពុត វិសាល", gender: "ប្រុស", phone: "0884605501", telegram: "@Kboysal01" },
+            { name: "ឆន ពៅ", gender: "ប្រុស", phone: "0972484295", telegram: "@pov1111rs" }
+        ];
+
+        const diData = [
+            { name: "លី នូភឿង", gender: "ប្រុស", phone: "0882028379", telegram: "@Ly_Nouphoeung" },
+            { name: "ដួង សុភី", gender: "ស្រី", phone: "0884517035", telegram: "@doungsophy" },
+            { name: "អ៊ី ចាន់ថុល", gender: "ប្រុស", phone: "0962306818", telegram: "@eychanthol" },
+            { name: "ប៉ី ថាវរី", gender: "ស្រី", phone: "090422242", telegram: "@Peythavry" },
+            { name: "សយ គឹមសុដានី", gender: "ស្រី", phone: "0717978187", telegram: "@Zeyyny_12" },
+            { name: "រឿន ស្រីណែត", gender: "ស្រី", phone: "0975452399", telegram: "@roeurnsreyneth" },
+            { name: "គីម ស្រីពៅ", gender: "ស្រី", phone: "0973826059", telegram: "Kim_srey_pov2" },
+            { name: "ណុយ ណូរីត", gender: "ស្រី", phone: "0712195596", telegram: "@N_Nithpov" },
+            { name: "ណាន់ ឃៀ", gender: "ស្រី", phone: "0976054794", telegram: "@Nann_khea" },
+            { name: "ព្រំ សុភ័ក្រ", gender: "ស្រី", phone: "0714795412", telegram: "@prom_sopheak" },
+            { name: "គឹម សុខឌីន", gender: "ស្រី", phone: "0963325472", telegram: "@sokdinn" },
+            { name: "រិន សុថាត់", gender: "ប្រុស", phone: "069239875", telegram: "@boyluy007" },
+            { name: "រម៉ាស់ រើ", gender: "ស្រី", phone: "0975928794", telegram: "@RomasReu234" },
+            { name: "ហឹន ចាន់ថៃ", gender: "ស្រី", phone: "0884625623", telegram: "@CHANTHAI270" },
+            { name: "លន ដាវីត", gender: "ប្រុស", phone: "0966134020", telegram: "@Tutuvid" },
+            { name: "ថោង ធីតា", gender: "ស្រី", phone: "011306166", telegram: "@T_Thida027" },
+            { name: "គង់ ស៊ាត", gender: "ប្រុស", phone: "0979492587", telegram: "@Kongseat007" },
+            { name: "ហឿង ជុងយាន", gender: "ប្រុស", phone: "0978897852", telegram: "@YEAN890" },
+            { name: "ស៊ឺន គឹមសាន", gender: "ស្រី", phone: "0964654495", telegram: "@seunkeomsan25" },
+            { name: "ណាត រក្សា", gender: "ប្រុស", phone: "0977720158", telegram: "@reaksa20nrsd05" }
+        ];
+
+        function renderTeam(type) {
+            const container = document.getElementById('team-container');
+            container.innerHTML = '';
+            document.getElementById('btn-duc').classList.toggle('active', type === 'duc');
+            document.getElementById('btn-di').classList.toggle('active', type === 'di');
+            
+            const data = (type === 'duc') ? ducData : diData;
+            data.forEach(m => {
+                const genderClass = (m.gender === 'ប្រុស') ? 'm-card' : 'f-card';
+                const icon = (m.gender === 'ប្រុស') ? 'fa-user-tie' : 'fa-user';
+                const tgUser = m.telegram.replace('@', '');
+                container.innerHTML += `
+                    <div class="member-card ${genderClass}">
+                        <div class="m-header">
+                            <div class="m-avatar"><i class="fa-solid ${icon}"></i></div>
+                            <div>
+                                <h4 style="font-size:1rem;">${m.name}</h4>
+                                <small style="color:var(--text-muted);">ភេទ: ${m.gender}</small>
+                            </div>
+                        </div>
+                        <div class="contact-box">
+                            <div><i class="fa-solid fa-phone"></i> <a href="tel:${m.phone}">${m.phone}</a></div>
+                            <div><i class="fa-brands fa-telegram"></i> <a href="https://t.me/${tgUser}" target="_blank">${m.telegram}</a></div>
+                        </div>
+                    </div>
+                `;
+            });
         }
 
-        // ចាប់ផ្តើម Slider ដំបូង
-        updateSlider();
-
-        // កំណត់ពេលអោយវាផ្លាស់ប្តូររៀងរាល់ 3 វិនាទី
-        setInterval(nextSlide, 3000); // 3000ms = 3 seconds
-        // --- ចប់កូដថ្មី ---
-
+        window.onload = () => { type(); renderTeam('duc'); };
     </script>
-
 </body>
 </html>
-
